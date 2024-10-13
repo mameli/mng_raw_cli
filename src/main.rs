@@ -4,7 +4,7 @@ use clap::Parser;
 
 #[derive(Parser)]
 struct Cli {
-    /// Mode to use
+    /// Mode to use: move_photos, select_raw
     mode: String
 }
 

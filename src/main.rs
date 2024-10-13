@@ -53,15 +53,45 @@ fn move_photos () {
     pb.finish_with_message("done");
 }
 
+fn select_raw () {
+    let raw_selected = Path::new("raw/selected/");
+
+    // Create raw/selected directory if it does not exist
+    if let Err(e) = fs::create_dir_all(raw_selected) {
+        eprintln!("Failed to create directory raw/selected/: {}", e);
+    }
+
+    // Iterate over files in jpg/selected directory
+    if let Ok(entries) = fs::read_dir("jpg/selected/") {
+        for entry in entries {
+            if let Ok(entry) = entry {
+                let path = entry.path();
+                if let Some(filename) = path.file_name() {
+                    if let Some(filename_str) = filename.to_str() {
+                        let selected_raf = filename_str.replace(".JPG", ".RAF");
+                        let raw_file_path = format!("raw/{}", selected_raf);
+                        let raw_file = Path::new(&raw_file_path);
+                        if raw_file.is_file() {
+                            println!("move raw/{} to raw/selected/{}", selected_raf, selected_raf);
+                            let destination = raw_selected.join(&selected_raf);
+                            if let Err(e) = fs::rename(raw_file, destination) {
+                                eprintln!("Failed to move file: {}", e);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 fn main() {
     let args = Cli::parse();
-
-
 
     // Check the mode
     match args.mode.as_str() {
         "move_photos" => move_photos(),
-        "select_raw" => println!("select_raw"),
+        "select_raw" => select_raw(),
         _ => println!("unknown mode"),
     }
 }

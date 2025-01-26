@@ -20,6 +20,9 @@ fn move_photos () {
         eprintln!("Failed to create directory raw/: {}", e);
     }
 
+    let jpg_dir = Path::new("jpg/");
+    let raw_dir = Path::new("raw/");
+
     let pb = indicatif::ProgressBar::new(100);
 
     // Iterate over files in the current directory

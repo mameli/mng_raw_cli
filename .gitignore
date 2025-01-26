@@ -1,0 +1,5 @@
+build/
+dist/
+tmp/
+
+mng_raw_cli.spec

@@ -1,4 +1,5 @@
 import os
+import argparse
 
 def divide_photos(path: str):
     os.chdir(path)
@@ -53,7 +54,22 @@ def select_raf_from_jpg(path: str):
         print('Done copying RAW files')
 
 def main():
-    select_raf_from_jpg('tmp')
+    parser = argparse.ArgumentParser(description="Manage JPG and RAF photo files.")
+    parser.add_argument(
+        '--divide', metavar='FOLDER', type=str, help="Organize JPG and RAF photos into folders."
+    )
+    parser.add_argument(
+        '--select', metavar='FOLDER', type=str, help="Move RAF files corresponding to JPGs in 'jpg/selected'."
+    )
+
+    args = parser.parse_args()
+
+    if args.divide:
+        divide_photos(args.divide)
+    elif args.select:
+        select_raf_from_jpg(args.select)
+    else:
+        print("Error: You must specify either --divide or --select with a folder path.")
 
 if __name__ == '__main__':
     main()

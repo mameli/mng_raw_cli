@@ -88,13 +88,13 @@ mng_raw_cli -select /path/to/photos
 test/
 ├── photo1.JPG
 ├── photo1.RAF
-├── doc.txt
+├── some_other_file.ext
 ```
 
 ### After Running `mng_raw_cli -divide test`
 ```
 test/
-├── doc.txt
+├── some_other_file.ext
 ├── jpg/
 │   ├── photo1.JPG
 │   └── selected/
@@ -106,7 +106,7 @@ test/
 ### After Adding `photo1.JPG` to `jpg/selected` and Running `mng_raw_cli -select test`
 ```
 test/
-├── doc.txt
+├── some_other_file.ext
 ├── jpg/
 │   ├── photo1.JPG
 │   └── selected/
@@ -128,7 +128,10 @@ Feel free to contribute to this project by submitting issues or pull requests. T
    cd mng_raw_cli
    ```
 
-2. Install dependencies (if any).
+2. Install dependencies
+   ```bash
+   uv sync
+   ```   
 
 3. Test the functionality by running the script directly:
    ```bash

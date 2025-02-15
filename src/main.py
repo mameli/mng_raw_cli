@@ -41,16 +41,17 @@ def select_raf_from_jpg(path: str):
     # Iterate over files in jpg/selected/
     if os.path.isdir('jpg/selected'):
         for entry in os.listdir('jpg/selected'):
-            print(f'Selecting {entry}')
-            RAF_filename = entry.replace('.JPG', '.RAF')
-            source_raf_path = f'raf/{RAF_filename}'
-            dest_raf_path = f'raf/selected/{RAF_filename}'
-            
-            if os.path.exists(dest_raf_path):
-                print(f'Omitting {entry}')
-                continue
+            if not entry.startswith("._"):
+                print(f'Selecting {entry}')
+                RAF_filename = entry.replace('.JPG', '.RAF')
+                source_raf_path = f'raf/{RAF_filename}'
+                dest_raf_path = f'raf/selected/{RAF_filename}'
+                
+                if os.path.exists(dest_raf_path):
+                    print(f'Omitting {entry}')
+                    continue
 
-            os.rename(source_raf_path, dest_raf_path)
+                os.rename(source_raf_path, dest_raf_path)
         print('Done copying RAW files')
 
 def main():

@@ -30,7 +30,7 @@
 
 3. Create an executable:
    ```bash
-   pyinstaller --onefile --name mng_raw_cli script.py
+   pyinstaller --onefile --name mng_raw_cli src/main.py
    ```
 
    This will generate an executable in the `dist/` folder named `mng_raw_cli` (or `mng_raw_cli.exe` on Windows).

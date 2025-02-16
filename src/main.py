@@ -14,7 +14,7 @@ def divide_photos(path: str):
 
     # List all entries in the current directory
     for entry in os.listdir('.'):
-        if os.path.isfile(entry):
+        if os.path.isfile(entry) and not entry.startswith("._"):
             filename = os.path.basename(entry)
             extension = os.path.splitext(filename)[1].split('.')[1]
             
